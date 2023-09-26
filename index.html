@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form id="form" action="">
+      <div class="main">
+        <div class="form1">
+          <table>
+            <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+              <th colspan="3"><h2 style="margin: 0;">Personal Information</h2></th>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+              <td>First Name :</td>
+              <td><input type="text" id="fname" placeholder="Enter First Name"/></td>
+              <td><p id="fNameError"></p></td>
+
+            </tr>
+            <tr>
+              <td>Last Name :</td>
+              <td><input type="text" id="lname" placeholder="Enter Last Name"/></td>
+              
+              <td><p id="lNameError"></p></td>
+            </tr>
+            <tr>
+                <td>Full Name :</td>
+                <td><input type="text" onclick="handelFullName()" name="fullName" id="fullName" placeholder="Automatically Generated" readonly></td>
+                <td><p style="color: black;" id="fullNameError">It is automatically field</p></td>
+              </tr>
+            <tr>
+              <td>Email :</td>
+              <td><input type="text" id="email" placeholder="Enter email"/></td>
+              <td><p id="emailError" ></p></td>
+
+            </tr>
+            <tr>
+              <td>Mobile No :</td>
+              <td><input type="text" id="mobileNo" placeholder="Enter Mobile No." /></td>
+              <td><p id="mobileNoError"></p></td>
+            </tr>
+            <tr>
+                <td>Age :</td>
+                <td><input type="text" name="age" id="age" placeholder="Enter Age"></td>
+              <td><p id="ageError"></p></td>
+
+            </tr>
+            <tr>
+                
+              <td>Gender :</td>
+              <td>
+                <input type="radio" value="male" name="gender" id="male" />Male
+                <input type="radio" value="female" name="gender" id="female" />Female
+                <input type="radio" value="other" name="gender" id="other" />Other
+              </td>
+              <td><p id="genderError"></p></td>
+
+            </tr>
+            <tr>
+              <td>Education :</td>
+              <td>
+                <select
+                  class="form-control dropdown"
+                  id="education"
+                  name="education"
+                >
+                  <option value="" selected="selected" disabled="disabled">
+                    -- Select one --
+                  </option>
+                  <option value="No formal education">
+                    No formal education
+                  </option>
+                  <option value="Primary education">Primary education</option>
+                  <option value="Secondary education">
+                    Secondary education or high school
+                  </option>
+                  <option value="Bachelor's degree">Bachelor's degree</option>
+                  <option value="Master's degree">Master's degree</option>
+                </select>
+              </td>
+              <td><p id="educationError"></p></td>
+
+            </tr>
+            <tr>
+              <td>DOB :</td>
+              <td>
+                <input type="date" name="dob" id="dob" />
+              </td>
+              <td><p id="dobError"></p></td>
+            </tr>
+            <tr>
+              <td>Hobbies :</td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  id="checkbox"
+                  value="movie"
+                />Movie
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  id="checkbox"
+                  value="sports"
+                />Sports
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  id="checkbox"
+                  value="reading"
+                />Reading
+              </td>
+              <td><p id="hobbiesError"></p></td>
+
+            </tr>
+            <tr>
+                <td>Color : </td>
+                <td><input type="color" name="color" id="color"></td>
+            </tr>
+<tr>
+    <td colspan="3">
+        <hr>
+    </td>
+</tr>
+            <tr>
+                <th colspan="3"><h3 style="margin: 0;">Bank Details :</h3></th>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td>Account Number :</td>
+                <td><input type="password" name="accountNumber" placeholder="Enter Account Number" id="accountNumber"></td>
+                <td><p id="accNoError"></p></td>
+                
+            </tr>
+            <tr>
+                <td>Repeat Account Number :</td>
+                <td><input type="text" name="r_accountNumber" onchange="handelAccountNumber()" id="c_accountNumber" placeholder="Repeat Account Number"></td>
+                <td><p id="conAccNoError"></p></td>
+
+            </tr>
+            <tr>
+                <td>IFSC Code :</td>
+                <td><input type="text" name="" id="ifscCode" placeholder="Enter IFSC Code"></td>
+                <td><p id="IFSCError"></p></td>
+
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="form2">
+          <table> 
+            <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="3"><h3 style="margin: 0;">Address : </h3></th>
+              </tr>
+              <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+              <tr>
+                <td>House/Plot/Building No :</td>
+                <td><input placeholder="Enter House/Plot/Building No" type="text" name="h_no" id="h_no" /></td>
+                <td><p id="h_noError"></p></td>
+  
+              </tr>
+              <tr>
+                <td>Street/Society Name :</td>
+                <td><input type="text" placeholder="Enter Street/Soc name" name="soc_name" id="soc_name" /></td>
+                <td><p id="socNameError"></p></td>
+  
+              </tr>
+              <tr>
+                <td>Landmark :</td>
+                <td><input type="text" placeholder="Enter Landmark" name="landmark" id="landmark" /></td>
+                <td><p id="landmarkError"></p></td>
+  
+              </tr>
+              <tr>
+                <td>Area :</td>
+                <td><input placeholder="Enter Area" type="text" name="area" id="area" /></td>
+                <td><p id="areaError"></p></td>
+            
+  
+              </tr>
+              <tr>
+                <td>Pincode :</td>
+                <td><input type="text" placeholder="Enter Pincode" name="pincode" id="pincode" /></td>
+                <td><p id="pincodeError"></p></td>
+  
+              </tr>
+              <tr>
+                <td>Country :</td>
+                <td><!-- Asia -->
+                  
+                  <select class="form-select" id="country" name="country">
+                      <option value="" selected="selected" disabled>--- Country ---</option>
+                      <option value="Afghanistan">Afghanistan</option>
+                      <option value="Armenia">Armenia</option>
+                      <option value="Azerbaijan">Azerbaijan</option>
+                      <option value="Bahrain">Bahrain</option>
+                      <option value="Bangladesh">Bangladesh</option>
+                      <option value="Bhutan">Bhutan</option>
+                      <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                      <option value="Brunei Darussalam">Brunei Darussalam</option>
+                      <option value="Cambodia">Cambodia</option>
+                      <option value="China">China</option>
+                      <option value="Christmas Island">Christmas Island</option>
+                      <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                      <option value="Cyprus">Cyprus</option>
+                      <option value="Georgia">Georgia</option>
+                      <option value="Hong Kong">Hong Kong</option>
+                      <option value="India">India</option>
+                      <option value="Indonesia">Indonesia</option>
+                      <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                      <option value="Iraq">Iraq</option>
+                      <option value="Israel">Israel</option>
+                      <option value="Japan">Japan</option>
+                      <option value="Jordan">Jordan</option>
+                      <option value="Kazakhstan">Kazakhstan</option>
+                      <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                      <option value="Korea, Republic of">Korea, Republic of</option>
+                      <option value="Kuwait">Kuwait</option>
+                      <option value="Kyrgyzstan">Kyrgyzstan</option>
+                      <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                      <option value="Lebanon">Lebanon</option>
+                      <option value="Macao">Macao</option>
+                      <option value="Malaysia">Malaysia</option>
+                      <option value="Maldives">Maldives</option>
+                      <option value="Mongolia">Mongolia</option>
+                      <option value="Myanmar">Myanmar</option>
+                      <option value="Nepal">Nepal</option>
+                      <option value="Oman">Oman</option>
+                      <option value="Pakistan">Pakistan</option>
+                      <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                      <option value="Philippines">Philippines</option>
+                      <option value="Qatar">Qatar</option>
+                      <option value="Russian Federation">Russian Federation</option>
+                      <option value="Saudi Arabia">Saudi Arabia</option>
+                      <option value="Singapore">Singapore</option>
+                      <option value="Sri Lanka">Sri Lanka</option>
+                      <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                      <option value="Taiwan, Province of China">Taiwan, Province of China</option>
+                      <option value="Tajikistan">Tajikistan</option>
+                      <option value="Thailand">Thailand</option>
+                      <option value="Timor-Leste">Timor-Leste</option>
+                      <option value="Turkey">Turkey</option>
+                      <option value="Turkmenistan">Turkmenistan</option>
+                      <option value="United Arab Emirates">United Arab Emirates</option>
+                      <option value="Uzbekistan">Uzbekistan</option>
+                      <option value="Viet Nam">Viet Nam</option>
+                      <option value="Yemen">Yemen</option>
+                  </select></td>
+                <td><p id="countryError"></p></td>
+
+            </tr>
+              <tr>
+                <td colspan="3">
+                  <input
+                    type="checkbox"
+                    name="permanent_address"
+                    id="permanent_address"
+                    onchange="handelAddress()"
+                  />this address is my permanent address
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+              <tr>
+                <th colspan="3"><h3 style="margin: 0;">Permanent Address :</h3></th>
+              </tr>
+              <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+              <tr>
+                <td>House/Plot/Building No :</td>
+                <td><input type="text" name="p_h_no" id="p_h_no" placeholder="Enter House No" /></td>
+                <td><p id="p_h_noError"></p></td>
+  
+              </tr>
+              <tr>
+                <td>Street/Society Name :</td>
+                <td><input type="text" name="p_soc_name" id="p_soc_name" placeholder="Enter Street/Soc name"/></td>
+                <td><p id="p_soc_nameError"></p></td>
+  
+              </tr>
+              <tr>
+                <td>Landmark :</td>
+                <td><input type="text" name="p_landmark" id="p_landmark" placeholder="Enter Landmark"/></td>
+                <td><p id="p_landmarkError"></p></td>
+  
+              </tr>
+              <tr>
+                <td>Area :</td>
+                <td><input type="text" name="p_area" id="p_area" placeholder="Enter Area" /></td>
+                <td><p id="p_areaError"></p></td>
+  
+              </tr>
+              <tr>
+                <td>Pincode :</td>
+                <td><input type="text" name="p_pincode" id="p_pincode" placeholder="Enter Pincode"/></td>
+                <td><p id="p_pinCodeError"></p></td>
+              </tr>
+              <tr>
+                <td>Country :</td>
+                <td><!-- Asia -->
+                  
+                  <select class="form-select" id="p_country" name="country">
+                      <option value=" " selected="selected" disabled>--- Country ---</option>
+                      <option value="Afghanistan">Afghanistan</option>
+                      <option value="Armenia">Armenia</option>
+                      <option value="Azerbaijan">Azerbaijan</option>
+                      <option value="Bahrain">Bahrain</option>
+                      <option value="Bangladesh">Bangladesh</option>
+                      <option value="Bhutan">Bhutan</option>
+                      <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                      <option value="Brunei Darussalam">Brunei Darussalam</option>
+                      <option value="Cambodia">Cambodia</option>
+                      <option value="China">China</option>
+                      <option value="Christmas Island">Christmas Island</option>
+                      <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                      <option value="Cyprus">Cyprus</option>
+                      <option value="Georgia">Georgia</option>
+                      <option value="Hong Kong">Hong Kong</option>
+                      <option value="India">India</option>
+                      <option value="Indonesia">Indonesia</option>
+                      <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                      <option value="Iraq">Iraq</option>
+                      <option value="Israel">Israel</option>
+                      <option value="Japan">Japan</option>
+                      <option value="Jordan">Jordan</option>
+                      <option value="Kazakhstan">Kazakhstan</option>
+                      <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                      <option value="Korea, Republic of">Korea, Republic of</option>
+                      <option value="Kuwait">Kuwait</option>
+                      <option value="Kyrgyzstan">Kyrgyzstan</option>
+                      <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                      <option value="Lebanon">Lebanon</option>
+                      <option value="Macao">Macao</option>
+                      <option value="Malaysia">Malaysia</option>
+                      <option value="Maldives">Maldives</option>
+                      <option value="Mongolia">Mongolia</option>
+                      <option value="Myanmar">Myanmar</option>
+                      <option value="Nepal">Nepal</option>
+                      <option value="Oman">Oman</option>
+                      <option value="Pakistan">Pakistan</option>
+                      <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                      <option value="Philippines">Philippines</option>
+                      <option value="Qatar">Qatar</option>
+                      <option value="Russian Federation">Russian Federation</option>
+                      <option value="Saudi Arabia">Saudi Arabia</option>
+                      <option value="Singapore">Singapore</option>
+                      <option value="Sri Lanka">Sri Lanka</option>
+                      <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                      <option value="Taiwan, Province of China">Taiwan, Province of China</option>
+                      <option value="Tajikistan">Tajikistan</option>
+                      <option value="Thailand">Thailand</option>
+                      <option value="Timor-Leste">Timor-Leste</option>
+                      <option value="Turkey">Turkey</option>
+                      <option value="Turkmenistan">Turkmenistan</option>
+                      <option value="United Arab Emirates">United Arab Emirates</option>
+                      <option value="Uzbekistan">Uzbekistan</option>
+                      <option value="Viet Nam">Viet Nam</option>
+                      <option value="Yemen">Yemen</option>
+                  </select></td>
+                <td><p id="p_countryError"></p></td>
+
+            </tr>
+              <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+            <tr class="button">
+                <td colspan="3" >
+                    <input type="submit" id="submitBtn" value="Submit">
+                     <input type="reset" id="resetBtn" value="Reset"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </form>
+
+    <script src="script.js"></script>
+  </body>
+</html>

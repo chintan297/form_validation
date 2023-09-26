@@ -1,0 +1,68 @@
+
+.main{
+    display: flex;
+    justify-content: space-evenly;
+}
+input,select{
+    border: 0px;
+    border-radius: 3px;
+    padding: 5px;
+}
+input::placeholder{
+    font-size:smaller;
+}
+input[type=text],input[type=number],input[type=password],select{
+    width: 95%;
+    box-shadow: rgba(0, 0, 0, 0.30) 0px 2px 8px;
+    position:relative
+}
+td{
+    padding: 3px;
+    width: 250px;
+}
+.form2,.form1{
+    align-items: center;
+    margin: 10px;
+    background-color: aliceblue;
+
+    padding-left: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
+}
+option{
+    width: 50px;
+}
+#male,#female,#other{
+    padding: 7px;
+}
+#submitBtn,#resetBtn{
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px;
+    color: #090909;
+    margin: 5px;
+    width: 100px;
+    padding: 5px;
+    border-radius: 3px;
+    background: rgb(247, 250, 251);
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+.button{
+    position: relative;
+    left: 29%;
+}
+#color{
+    background-color: #ffffff;
+    width: 40px;
+    height: 20px;
+    padding: 0;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    cursor: pointer;
+}
+p{
+    color: red;
+    font-size: small;
+    margin: 0;
+}
