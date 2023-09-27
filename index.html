@@ -10,7 +10,7 @@
     <form id="form" action="">
       <div class="main">
         <div class="form1">
-          <table>
+          <table id="table1">
             <tr>
                 <td colspan="3">
                     <hr>
@@ -25,36 +25,39 @@
                 </td>
             </tr>
             <tr>
+              <td>Id :</td>
+              <td><input placeholder="Click to see ID" type="number" name="id" id="id" onclick="handelId()" readonly></td>
+            </tr>
+            <tr>
               <td>First Name :</td>
-              <td><input type="text" id="fname" placeholder="Enter First Name"/></td>
+              <td><input onkeyup="handleInputs('fname','fNameError')" type="text" id="fname" placeholder="Enter First Name"/></td>
               <td><p id="fNameError"></p></td>
 
             </tr>
             <tr>
               <td>Last Name :</td>
-              <td><input type="text" id="lname" placeholder="Enter Last Name"/></td>
-              
+              <td><input onkeyup="handleInputs('lname','lNameError')" type="text" id="lname" placeholder="Enter Last Name"/></td>
               <td><p id="lNameError"></p></td>
             </tr>
             <tr>
                 <td>Full Name :</td>
-                <td><input type="text" onclick="handelFullName()" name="fullName" id="fullName" placeholder="Automatically Generated" readonly></td>
+                <td><input id="fullName" type="text" onclick="handelFullName()" name="fullName" id="fullName" placeholder="Automatically Generated" readonly></td>
                 <td><p style="color: black;" id="fullNameError">It is automatically field</p></td>
               </tr>
             <tr>
               <td>Email :</td>
-              <td><input type="text" id="email" placeholder="Enter email"/></td>
+              <td><input onkeyup="handleInputs('email','emailError')" type="text" id="email" placeholder="Enter email"/></td>
               <td><p id="emailError" ></p></td>
 
             </tr>
             <tr>
               <td>Mobile No :</td>
-              <td><input type="text" id="mobileNo" placeholder="Enter Mobile No." /></td>
+              <td><input onkeyup="handleInputs('mobileNo','mobileNoError')" type="text" id="mobileNo" placeholder="Enter Mobile No." /></td>
               <td><p id="mobileNoError"></p></td>
             </tr>
             <tr>
                 <td>Age :</td>
-                <td><input type="text" name="age" id="age" placeholder="Enter Age"></td>
+                <td><input onkeyup="handleInputs('age','ageError')" type="text" name="age" id="age" placeholder="Enter Age"></td>
               <td><p id="ageError"></p></td>
 
             </tr>
@@ -62,9 +65,9 @@
                 
               <td>Gender :</td>
               <td>
-                <input type="radio" value="male" name="gender" id="male" />Male
-                <input type="radio" value="female" name="gender" id="female" />Female
-                <input type="radio" value="other" name="gender" id="other" />Other
+                <input onchange="handleInputs('male','genderError')" type="radio" value="male" name="gender" id="male" />Male
+                <input onchange="handleInputs('female','genderError')"  type="radio" value="female" name="gender" id="female" />Female
+                <input onchange="handleInputs('other','genderError')" type="radio" value="other" name="gender" id="other" />Other
               </td>
               <td><p id="genderError"></p></td>
 
@@ -76,6 +79,7 @@
                   class="form-control dropdown"
                   id="education"
                   name="education"
+                  onchange="handleInputs('education','educationError')"
                 >
                   <option value="" selected="selected" disabled="disabled">
                     -- Select one --
@@ -97,26 +101,29 @@
             <tr>
               <td>DOB :</td>
               <td>
-                <input type="date" name="dob" id="dob" />
+                <input onchange="handleInputs('dob','dobError')" type="date" name="dob" id="dob" />
               </td>
               <td><p id="dobError"></p></td>
             </tr>
             <tr>
               <td>Hobbies :</td>
               <td>
-                <input
+                <input 
+                  onchange="handleInputs('checkbox','hobbiesError')"
                   type="checkbox"
                   name="hobbies"
                   id="checkbox"
                   value="movie"
                 />Movie
-                <input
+                <input 
+                onchange="handleInputs('checkbox','hobbiesError')"
                   type="checkbox"
                   name="hobbies"
                   id="checkbox"
                   value="sports"
                 />Sports
-                <input
+                <input 
+                onchange="handleInputs('checkbox','hobbiesError')"
                   type="checkbox"
                   name="hobbies"
                   id="checkbox"
@@ -128,13 +135,13 @@
             </tr>
             <tr>
                 <td>Color : </td>
-                <td><input type="color" name="color" id="color"></td>
+                <td><input onkeyup="handleInputs('color')" type="color" name="color" id="color"></td>
             </tr>
-<tr>
-    <td colspan="3">
-        <hr>
-    </td>
-</tr>
+            <tr>
+              <td colspan="3">
+                <hr>
+              </td>
+            </tr>
             <tr>
                 <th colspan="3"><h3 style="margin: 0;">Bank Details :</h3></th>
             </tr>
@@ -145,19 +152,19 @@
             </tr>
             <tr>
                 <td>Account Number :</td>
-                <td><input type="password" name="accountNumber" placeholder="Enter Account Number" id="accountNumber"></td>
+                <td><input type="password" onkeyup="handleInputs('accountNumber','accNoError')" name="accountNumber" placeholder="Enter Account Number" id="accountNumber"></td>
                 <td><p id="accNoError"></p></td>
                 
             </tr>
             <tr>
                 <td>Repeat Account Number :</td>
-                <td><input type="text" name="r_accountNumber" onchange="handelAccountNumber()" id="c_accountNumber" placeholder="Repeat Account Number"></td>
+                <td><input type="text" onkeyup="handleInputs('c_accountNumber','conAccNoError')" name="r_accountNumber" id="c_accountNumber" placeholder="Repeat Account Number"></td>
                 <td><p id="conAccNoError"></p></td>
 
             </tr>
             <tr>
                 <td>IFSC Code :</td>
-                <td><input type="text" name="" id="ifscCode" placeholder="Enter IFSC Code"></td>
+                <td><input onkeyup="handleInputs('ifscCode','IFSCError')" type="text" name="" id="ifscCode" placeholder="Enter IFSC Code"></td>
                 <td><p id="IFSCError"></p></td>
 
             </tr>
@@ -170,7 +177,7 @@
         </div>
 
         <div class="form2">
-          <table> 
+          <table id="table2"> 
             <tr>
                 <td colspan="3">
                     <hr>
@@ -186,32 +193,32 @@
             </tr>
               <tr>
                 <td>House/Plot/Building No :</td>
-                <td><input placeholder="Enter House/Plot/Building No" type="text" name="h_no" id="h_no" /></td>
+                <td><input onkeyup="handleInputs('h_no','h_noError')" placeholder="Enter House/Plot/Building No" type="text" name="h_no" id="h_no" /></td>
                 <td><p id="h_noError"></p></td>
   
               </tr>
               <tr>
                 <td>Street/Society Name :</td>
-                <td><input type="text" placeholder="Enter Street/Soc name" name="soc_name" id="soc_name" /></td>
+                <td><input onkeyup="handleInputs('soc_name','socNameError')" type="text" placeholder="Enter Street/Soc name" name="soc_name" id="soc_name" /></td>
                 <td><p id="socNameError"></p></td>
   
               </tr>
               <tr>
                 <td>Landmark :</td>
-                <td><input type="text" placeholder="Enter Landmark" name="landmark" id="landmark" /></td>
+                <td><input onkeyup="handleInputs('landmark','landmarkError')" type="text" placeholder="Enter Landmark" name="landmark" id="landmark" /></td>
                 <td><p id="landmarkError"></p></td>
   
               </tr>
               <tr>
                 <td>Area :</td>
-                <td><input placeholder="Enter Area" type="text" name="area" id="area" /></td>
+                <td><input onkeyup="handleInputs('area','areaError')" placeholder="Enter Area" type="text" name="area" id="area" /></td>
                 <td><p id="areaError"></p></td>
             
   
               </tr>
               <tr>
                 <td>Pincode :</td>
-                <td><input type="text" placeholder="Enter Pincode" name="pincode" id="pincode" /></td>
+                <td><input onkeyup="handleInputs('pincode','pincodeError')" type="text" placeholder="Enter Pincode" name="pincode" id="pincode" /></td>
                 <td><p id="pincodeError"></p></td>
   
               </tr>
@@ -219,7 +226,7 @@
                 <td>Country :</td>
                 <td><!-- Asia -->
                   
-                  <select class="form-select" id="country" name="country">
+                  <select class="form-select" id="country" onchange="handleInputs('country','countryError')" name="country">
                       <option value="" selected="selected" disabled>--- Country ---</option>
                       <option value="Afghanistan">Afghanistan</option>
                       <option value="Armenia">Armenia</option>
@@ -286,7 +293,7 @@
                     type="checkbox"
                     name="permanent_address"
                     id="permanent_address"
-                    onchange="handelAddress()"
+                    onclick="handelAddress()"
                   />this address is my permanent address
                 </td>
               </tr>
@@ -305,39 +312,40 @@
             </tr>
               <tr>
                 <td>House/Plot/Building No :</td>
-                <td><input type="text" name="p_h_no" id="p_h_no" placeholder="Enter House No" /></td>
+                <td><input onkeyup="handleInputs('p_h_no','p_h_noError')" type="text" name="p_h_no" id="p_h_no" placeholder="Enter House No" /></td>
                 <td><p id="p_h_noError"></p></td>
   
               </tr>
               <tr>
                 <td>Street/Society Name :</td>
-                <td><input type="text" name="p_soc_name" id="p_soc_name" placeholder="Enter Street/Soc name"/></td>
+                <td><input onkeyup="handleInputs('p_soc_name','p_soc_nameError')" type="text" name="p_soc_name" id="p_soc_name" placeholder="Enter Street/Soc name"/></td>
                 <td><p id="p_soc_nameError"></p></td>
   
               </tr>
               <tr>
                 <td>Landmark :</td>
-                <td><input type="text" name="p_landmark" id="p_landmark" placeholder="Enter Landmark"/></td>
+                <td><input onkeyup="handleInputs('p_landmark','p_landmarkError')" type="text" name="p_landmark" id="p_landmark" placeholder="Enter Landmark"/></td>
                 <td><p id="p_landmarkError"></p></td>
   
               </tr>
               <tr>
                 <td>Area :</td>
-                <td><input type="text" name="p_area" id="p_area" placeholder="Enter Area" /></td>
+                <td><input onkeyup="handleInputs('p_area','p_areaError')" type="text" name="p_area" id="p_area" placeholder="Enter Area" /></td>
                 <td><p id="p_areaError"></p></td>
   
               </tr>
               <tr>
                 <td>Pincode :</td>
-                <td><input type="text" name="p_pincode" id="p_pincode" placeholder="Enter Pincode"/></td>
+                <td><input onkeyup="handleInputs('p_pincode','p_pinCodeError')" type="text" name="p_pincode" id="p_pincode" placeholder="Enter Pincode"/></td>
                 <td><p id="p_pinCodeError"></p></td>
               </tr>
               <tr>
                 <td>Country :</td>
                 <td><!-- Asia -->
                   
-                  <select class="form-select" id="p_country" name="country">
-                      <option value=" " selected="selected" disabled>--- Country ---</option>
+                  <select class="form-select" id="p_country" name="p_country" onchange="handleInputs('p_country','p_countryError')"  >
+                      <option value="" selected="selected" disabled>--- Country ---</option>
+                
                       <option value="Afghanistan">Afghanistan</option>
                       <option value="Armenia">Armenia</option>
                       <option value="Azerbaijan">Azerbaijan</option>
@@ -404,8 +412,9 @@
             </tr>
             <tr class="button">
                 <td colspan="3" >
-                    <input type="submit" id="submitBtn" value="Submit">
-                     <input type="reset" id="resetBtn" value="Reset"></td>
+                    <input  type="submit" id="submitBtn" value="Submit">
+             
+                     <input type="reset" onclick="resetError()"id="resetBtn" value="Reset"></td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -416,6 +425,8 @@
         </div>
       </div>
     </form>
+
+    <table id="table"></table>
 
     <script src="script.js"></script>
   </body>

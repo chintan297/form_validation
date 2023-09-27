@@ -24,26 +24,211 @@ var p_h_no = document.getElementById("p_h_no");
 var p_soc_name = document.getElementById("p_soc_name");
 var p_landmark = document.getElementById("p_landmark");
 var p_area = document.getElementById("p_area");
-var p_pincode = document.getElementById("p_pincode");
+var pn_pincode = document.getElementById("p_pincode");
 var p_country = document.getElementById("p_country");
+var rows = document.getElementById("table");
+var id = document.getElementById("id");
+var isPermanent = true;
+var fields = [
+  fName,
+  lName,
+  fullName,
+  email,
+  mobileNo,
+  age,
+  gender,
+  education,
+  dob,
+  hobbies,
+  color,
+  acNumber,
+  r_AcNumber,
+  ifscCode,
+  h_no,
+  soc_name,
+  landmark,
+  area,
+  pincode,
+  country,
+  pr_address,
+  p_h_no,
+  p_soc_name,
+  p_landmark,
+  p_area,
+  pn_pincode,
+  p_country,
+  rows,
+  id,
+];
+var errorFields = [
+  fNameError,
+  lNameError,
+  emailError,
+  mobileNoError,
+  ageError,
+  genderError,
+  educationError,
+  dobError,
+  hobbiesError,
+  accNoError,
+  conAccNoError,
+  IFSCError,
+  h_noError,
+  socNameError,
+  landmarkError,
+  areaError,
+  pincodeError,
+  countryError,
+  p_h_noError,
+  p_soc_nameError,
+  p_landmarkError,
+  p_areaError,
+  p_pinCodeError,
+  p_countryError,
+];
 
+var perErrorFields = [
+  p_h_noError,
+  p_soc_nameError,
+  p_landmarkError,
+  p_areaError,
+  p_pinCodeError,
+  p_countryError,
+];
+var data = [];
+let i = 1;
+
+const handelId = () => {
+  if (!id.value) {
+    id.value = i++;
+  }
+};
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log("Form Submit");
   formValidation();
 });
 
+const handleOthers = (id, value) => {
+  console.log(id);
+};
+const handleInputs = (id, errorId) => {
+  if (id == "male" || id == "female" || id == "other") {
+    var value = document.getElementById(id).checked;
+    console.log(value);
+    if (value) {
+      handelNormalError(value, id, errorId);
+    }
+  } else {
+    console.log(id, errorId);
+    var value = document.getElementById(id).value;
+    if (
+      id == "country" ||
+      id == "p_country" ||
+      id == "checkbox" ||
+      id == "education" ||
+      id == "soc_name" ||
+      id == "h_no" ||
+      id == "landmark" ||
+      id == "area" ||
+      id == "pincode" ||
+      id == "p_h_no" ||
+      id == "p_soc_name" ||
+      id == "p_landmark" ||
+      id == "p_area" ||
+      id == "p_pincode"
+    ) {
+      handelNormalError(value, id, errorId);
+    } else if (id == "dob") {
+      var nDOB = value;
+      var userDate = new Date(nDOB).getTime();
+      let today = new Date().getTime();
+      let userYear = new Date(nDOB).getFullYear();
+      let thisYear = new Date().getFullYear();
+      var userAge = thisYear - userYear;
+      if (!nDOB) {
+        printError("dobError", "Please Select Date Of Birth");
+      } else {
+        if (userDate > today) {
+          printError("dobError", "Your Date is grater than today");
+        } else {
+          printError("dobError", "");
+        }
+      }
+    } else if (value.trim().length < 1) {
+      printError(`${errorId}`, `Please Enter ${id}`);
+    } else {
+      if (id == "fname") {
+        var regName = /^[a-zA-Z ]{1,30}$/;
+        handleError(value, id, errorId, regName);
+      } else if (id == "lname") {
+        var regName = /^[a-zA-Z ]{1,30}$/;
+        handleError(value, id, errorId, regName);
+      } else if (id == "email") {
+        var regName = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+        handleError(value, id, errorId, regName);
+      } else if (id == "mobileNo") {
+        var regName = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+        handleError(value, id, errorId, regName);
+      } else if (id == "age") {
+        var regName = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/;
+        handleError(value, id, errorId, regName);
+      } else if (id == "accountNumber" || id == "c_accountNumber") {
+        var regName = /^[0-9]{9,18}$/;
+        handleError(value, id, errorId, regName);
+        var accNumber = acNumber.value;
+        var reAccNumber = r_AcNumber.value;
+        console.log(accNumber, reAccNumber);
+        if (accNumber === reAccNumber) {
+          console.log("Right Account Number");
+          printError("conAccNoError", "Account Number Matched", "green");
+        } else {
+          printError("conAccNoError", "Account Number is not matched");
+        }
+      } else if (id == "ifscCode") {
+        var regName = /^[A-Z]{4}0[A-Z0-9]{6}$/;
+        handleError(value, id, errorId, regName);
+      }
+    }
+  }
+};
+
+const handelNormalError = (value, id, errorId) => {
+  if (!value) {
+    printError(`${errorId}`, `Please Enter valid ${id}`);
+  } else {
+    printError(`${errorId}`, "");
+    errorId = false;
+  }
+};
+
+const handleError = (val, id, errorId, regex) => {
+  if (!regex.test(val)) {
+    printError(`${errorId}`, `Please Enter valid ${id}`);
+  } else {
+    printError(`${errorId}`, "");
+    errorId = false;
+  }
+};
+
+const removeFields = () => {
+  fields.forEach(function (arr) {
+    arr.value = "";
+  });
+};
+
 const printError = (err, msg, color = "red") => {
   document.getElementById(err).innerHTML = msg;
   document.getElementById(err).style.color = color;
 };
 
-const formValidation = () => {
+const formValidation = (e) => {
   let fNameError =
     (lNameError =
     genderError =
     emailError =
     educationError =
+    ageError =
     dobError =
     hobbiesError =
     accNoError =
@@ -51,7 +236,7 @@ const formValidation = () => {
     IFSCError =
     h_noError =
     socNameError =
-    landmarkErrorv =
+    landmarkError =
     areaError =
     pincodeError =
     countryError =
@@ -59,7 +244,7 @@ const formValidation = () => {
     p_soc_nameError =
     p_landmarkError =
     p_areaError =
-    p_pinCodeError =
+    p_pincodeError =
     p_countryError =
       true);
   var firstName = fName.value;
@@ -126,7 +311,6 @@ const formValidation = () => {
       printError("ageError", "");
     }
   }
-
   for (let i = 0; i < gender.length; i++) {
     if (gender[i].checked) {
       var nGender = gender[i].value;
@@ -205,7 +389,7 @@ const formValidation = () => {
       printError("conAccNoError", "Please Enter valid Re Account Number");
     } else {
       printError("conAccNoError", "");
-      re = false;
+      conAccNoError = false;
     }
   }
 
@@ -250,17 +434,13 @@ const formValidation = () => {
     printError("areaError", " ");
     areaError = false;
   }
+
   var nPincode = pincode.value;
-  if (nPincode.trim().length < 1) {
-    printError("pincodeError", "Please Enter Pincode");
+  if (!nPincode) {
+    printError("pincodeError", "Please Enter pincode");
   } else {
-    var regName = /^[0-9]{6}$/;
-    if (!regName.test(nPincode)) {
-      printError("pincodeError", "Please Enter Pincode");
-    } else {
-      printError("pincodeError", "");
-      pincodeError = false;
-    }
+    printError("pincodeError", " ");
+    pincodeError = false;
   }
 
   var nCountry = country.value;
@@ -270,8 +450,7 @@ const formValidation = () => {
     printError("countryError", "");
     countryError = false;
   }
-
-
+  // if(isPermanent){
   var prHouNo = p_h_no.value;
   if (!prHouNo) {
     printError("p_h_noError", "Please Enter House/Plot/Building Number");
@@ -300,50 +479,205 @@ const formValidation = () => {
     printError("p_areaError", " ");
     p_areaError = false;
   }
-  var pPincode = pincode.value;
-  if (pPincode.trim().length < 1) {
-    printError("p_pincodeError", "Please Enter Pincode");
+  var per_pincode = pn_pincode.value;
+  if (!per_pincode) {
+    printError("p_pinCodeError", "Please Enter pincode");
   } else {
-    var regName = /^[0-9]{6}$/;
-    if (!regName.test(pPincode)) {
-      printError("p_pincodeError", "Please Enter Pincode");
-    } else {
-      printError("p_pincodeError", "");
-      p_pincodeError = false;
-    }
+    printError("p_pinCodeError", " ");
+    p_pinCodeError = false;
   }
 
   var pCountry = p_country.value;
   if (!pCountry) {
-    printError("p_pinCodeError", "Please Select Country");
+    printError("p_countryError", "Please Select Country");
   } else {
-    printError("p_pinCodeError", "");
-    p_pinCodeError = false;
+    printError("p_countryError", "");
+    p_countryError = false;
+  }
+  // }
+
+  if (
+    (fNameError ||
+      lNameError ||
+      genderError ||
+      emailError ||
+      educationError ||
+      ageError ||
+      dobError ||
+      hobbiesError ||
+      accNoError ||
+      conAccNoError ||
+      IFSCError ||
+      h_noError ||
+      socNameError ||
+      landmarkError ||
+      areaError ||
+      pincodeError ||
+      countryError ||
+      p_h_noError ||
+      p_soc_nameError ||
+      p_landmarkError ||
+      p_areaError ||
+      p_pinCodeError ||
+      p_countryError) == true
+  ) {
+    console.log("Error");
+    // console.log(fNameError ,
+    //   lNameError ,
+    //   genderError ,
+    //   emailError ,
+    //   educationError ,
+    //   ageError ,
+    //   dobError ,
+    //   hobbiesError ,
+    //   accNoError ,
+    //   conAccNoError ,
+    //   IFSCError ,
+    //   h_noError ,
+    //   socNameError ,
+    //   landmarkError ,
+    //   areaError ,
+    //   pincodeError ,
+    //   countryError ,
+    //   p_h_noError ,
+    //   p_soc_nameError ,
+    //   p_landmarkError ,
+    //   p_areaError ,
+    //   p_pincodeError ,
+    //   p_countryError)
+    return false;
+  } else {
+    console.log("Accept data");
+    var obj = {};
+    obj.id = Number(id.value);
+    obj.fName = firstName;
+    obj.lName = lastName;
+    obj.fullName = firstName + " " + lastName;
+    obj.email = nEmail;
+    obj.mobile = Number(nMobileNo);
+    obj.age = Number(nAge);
+    obj.gender = nGender;
+    obj.education = nEducation;
+    obj.dob = nDOB;
+    obj.hobbies = nHobbies;
+    obj.accNo = Number(accNumber);
+    obj.ifscCode = IFSCCode;
+    obj.address =
+      houseNo +
+      ", " +
+      socName +
+      ", " +
+      nLandmark +
+      ", " +
+      nArea +
+      "-" +
+      nPincode +
+      ", " +
+      nCountry;
+    obj.perAddress =
+      prHouNo +
+      ", " +
+      pSocName +
+      ", " +
+      pLandmark +
+      ", " +
+      pArea +
+      "-" +
+      per_pincode +
+      ", " +
+      pCountry;
+    data.push(obj);
+    acceptData(data);
+    removeFields();
   }
 };
+const acceptData = (data) => {
+  console.log(data);
+
+  rows.innerHTML = ` <tr>
+  <th>Id</th>
+  <th>First Name</th>
+  <th>Last Name</th>
+  <th>Full Name</th>
+  <th>Email</th>
+  <th>Mobile No</th>
+  <th>Age</th>
+  <th>Gender</th>
+  <th>Education</th>
+  <th>Dob</th>
+  <th>Hobbies</th>
+  <th>Account Number</th>
+  <th>IFSC Code</th>
+  <th>Address</th>
+  <th>Permanent Address</th>
+</tr>`;
+
+for(let d of data) {
+  rows.innerHTML += ` <tr>
+           <td>${d.id}</td>
+           <td>${d.fName}</td>
+           <td>${d.lName}</td>
+           <td>${d.fullName}</td>
+           <td>${d.email}</td>
+           <td>${d.mobile}</td>
+           <td>${d.age}</td>
+           <td>${d.gender}</td>
+           <td>${d.education}</td>
+           <td>${d.dob}</td>
+           <td>${d.hobbies}</td>
+           <td>${d.accNo}</td>
+           <td>${d.ifscCode}</td>
+           <td>${d.address}</td>
+           <td>${d.perAddress}</td>
+         </tr>`;
+
+};
+}
+
 const handelFullName = () => {
   fullName.value = fName.value + " " + lName.value;
-};
-
-const handelAccountNumber = () => {
-  var accNumber = acNumber.value;
-  var reAccNumber = r_AcNumber.value;
-  if (accNumber === reAccNumber) {
-    console.log("Right Account Number");
-    printError("conAccNoError", "Account Number Matched", "green");
-  } else {
-    printError("conAccNoError", "Account Number is not matched");
-  }
 };
 const handelAddress = () => {
   const check_address = pr_address.checked;
 
   if (check_address) {
-    document.getElementById("p_h_no").value = h_no.value
-    document.getElementById("p_soc_name").value = soc_name.value
-    document.getElementById("p_landmark").value = landmark.value
-    document.getElementById("p_area").value =area.value
-    document.getElementById("p_pincode").value = pincode.value
-    document.getElementById("p_country").value = country.value
+    if (
+      h_no.value &&
+      soc_name.value &&
+      landmark.value &&
+      area.value &&
+      pincode.value &&
+      country.value
+    ) {
+      p_h_no.value = h_no.value;
+      p_soc_name.value = soc_name.value;
+      p_landmark.value = landmark.value;
+      p_area.value = area.value;
+      p_pincode.value = pincode.value;
+      p_country.value = country.value;
+      handlePerResetError();
+    } else {
+      alert("Please enter all fields of address");
+      pr_address.checked = false;
+    }
+  } else {
+    p_h_no.value = "";
+    p_soc_name.value = "";
+    p_landmark.value = "";
+    p_area.value = "";
+    p_pincode.value = "";
+    p_country.value = "";
   }
 };
+const handlePerResetError = () => {
+  perErrorFields.forEach(function (arr) {
+    arr.innerHTML = "";
+  });
+};
+const resetError = () => {
+  errorFields.forEach(function (arr) {
+    // document.getElementById(arr).innerHTML = " "
+    arr.innerHTML = "";
+  });
+};
+
