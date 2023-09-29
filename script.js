@@ -26,6 +26,7 @@ var p_landmark = document.getElementById("p_landmark");
 var p_area = document.getElementById("p_area");
 var pn_pincode = document.getElementById("p_pincode");
 var p_country = document.getElementById("p_country");
+
 var rows = document.getElementById("table");
 var id = document.getElementById("id");
 var isPermanent = true;
@@ -142,7 +143,7 @@ const handleOthers = (id, errorId) => {
   }
 };
 
-// handle onchange error 
+// handle onkeyup error
 const handleInputs = (id, errorId) => {
   if (id == "male" || id == "female" || id == "other") {
     var value = document.getElementById(id).checked;
@@ -245,6 +246,57 @@ const handleInputs = (id, errorId) => {
   }
 };
 
+var sum = 0;
+var sub = 0;
+var mul = 0
+var div = 0
+var n1 = document.getElementById("number_1");
+var n2 = document.getElementById("number_2");
+const handleNumbers = (id, errorId) => {
+  var value = document.getElementById(id).value;
+
+  if (value.trim().length < 1) {
+    printError(`${errorId}`, `Please Enter ${id}`);
+  }
+  else{
+        if (id == "number_1") {
+          var regName = /^-?\d*\.?\d+$/;
+          handleError(value, id, errorId, regName);
+        } else if (id == "number_2") {
+          var regex = /^(100|[1-9][0-9]?)$/
+          if (!regex.test(value)) {
+            printError(`${errorId}`, `Please Enter between 1 to 100`);
+          } else {
+            printError(`${errorId}`, "");
+          }
+          
+        }
+  }
+  let number1 = Number(n1.value);
+  let number2 = Number(n2.value);
+  if (number1 && number2) {
+    sum = number1 + number2;
+    sub = number1 - number2;
+    mul = number1 * number2
+    div = number1 / number2
+  } else if (number1) {
+    sub = number1;
+    sum = number1;
+    mul = number1
+    div = number1
+  } else {
+    sub = number2;
+    sum = number2;
+    mul = number2
+    div = number2
+  }
+  document.getElementById("add").value = sum;
+  document.getElementById("sub").value = sub;
+  document.getElementById("mul").value = mul;
+  document.getElementById("div").value = div;
+};
+
+
 // handle error for normal field
 const handelNormalError = (value, id, errorId) => {
   if (!value) {
@@ -283,7 +335,6 @@ const printError = (err, msg, color = "red") => {
   document.getElementById(err).innerHTML = msg;
   document.getElementById(err).style.color = color;
 };
-
 
 // form validation - when user submit form
 const formValidation = (e) => {
@@ -559,7 +610,26 @@ const formValidation = (e) => {
     p_countryError = false;
   }
 
-// check all error if at least one true gives errors otherwise stored data in array 
+  var num1 = n1.value;
+  if (num1.trim().length < 1) {
+    printError("number_1_error", "Please Enter Number 1");
+  }
+  var num2 = n2.value;
+  if (num2.trim().length < 1) {
+    printError("number_2_error", "Please Enter Number 2");
+  }
+
+  // const formValidation=()=>{
+  //   fields.forEach((arr,i) => {
+  //     var val = arr.value
+  //     console.log(val)
+  //     var value = val.value
+  //     if (value.length < 1) {
+  //       printError(`${errorFields[i]}`, `Please Enter ${arr}`);
+  //     }
+  //   });
+
+  // check all error if at least one true gives errors otherwise stored data in array
   if (
     (fNameError ||
       lNameError ||
@@ -633,7 +703,6 @@ const formValidation = (e) => {
   }
 };
 
-
 // accept data and create table and display fields
 const acceptData = (data) => {
   console.log(data);
@@ -677,12 +746,10 @@ const acceptData = (data) => {
   }
 };
 
-
 // handle auto fetch full_name based on first name and last name
 const handelFullName = () => {
   fullName.value = fName.value + " " + lName.value;
 };
-
 
 // handel permanent address when user checked "this is my permanent address" button
 const handelAddress = () => {
@@ -737,3 +804,4 @@ const resetError = () => {
     arr.innerHTML = "";
   });
 };
+console.log(fields);

@@ -74,6 +74,22 @@ p{
   #table td,
 th {
   padding: 0 15px;
-  border: 1px solid black;
+ 
   text-align: center;
+}
+
+#table3{
+   position: relative;
+   left: 4%;
+    margin: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 17px 15px;
+    background-color: aliceblue;
+    width: 88%;
+    padding: 20px;
+}
+
+
+#tab3{
+    position: relative;
+    left : 29%
 }
