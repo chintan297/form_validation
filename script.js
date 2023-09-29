@@ -86,6 +86,20 @@ var errorFields = [
   p_pinCodeError,
   p_countryError,
 ];
+var perFields = [
+  h_no,
+  soc_name,
+  landmark,
+  area,
+  pincode,
+  country,
+  p_h_no,
+  p_soc_name,
+  p_landmark,
+  p_area,
+  pn_pincode,
+  p_country,
+];
 
 var perErrorFields = [
   p_h_noError,
@@ -108,10 +122,27 @@ form.addEventListener("submit", (e) => {
   console.log("Form Submit");
   formValidation();
 });
-
-const handleOthers = (id, value) => {
-  console.log(id);
+let checkBox = [];
+// handle checkbox error (onchange)
+const handleOthers = (id, errorId) => {
+  var check = document.getElementById(id);
+  if (check.checked === true) {
+    checkBox.push(check.value);
+  } else {
+    checkBox = checkBox.filter(function (arr) {
+      if (arr !== check.value) {
+        return true;
+      }
+    });
+  }
+  if (checkBox.length < 1) {
+    printError(`${errorId}`, `Please Select Hobbies`);
+  } else {
+    printError(`${errorId}`, "");
+  }
 };
+
+// handle onchange error 
 const handleInputs = (id, errorId) => {
   if (id == "male" || id == "female" || id == "other") {
     var value = document.getElementById(id).checked;
@@ -120,12 +151,10 @@ const handleInputs = (id, errorId) => {
       handelNormalError(value, id, errorId);
     }
   } else {
-    console.log(id, errorId);
     var value = document.getElementById(id).value;
     if (
       id == "country" ||
       id == "p_country" ||
-      id == "checkbox" ||
       id == "education" ||
       id == "soc_name" ||
       id == "h_no" ||
@@ -141,20 +170,43 @@ const handleInputs = (id, errorId) => {
       handelNormalError(value, id, errorId);
     } else if (id == "dob") {
       var nDOB = value;
-      var userDate = new Date(nDOB).getTime();
-      let today = new Date().getTime();
-      let userYear = new Date(nDOB).getFullYear();
-      let thisYear = new Date().getFullYear();
-      var userAge = thisYear - userYear;
-      if (!nDOB) {
-        printError("dobError", "Please Select Date Of Birth");
+      let userDate = new Date(nDOB).getTime();
+      let today = Date.now();
+      console.log(userDate);
+      console.log(today);
+      let getTime = today - userDate;
+      // console.log(getTime)
+      let difference = new Date(getTime);
+      let age = Math.abs(difference.getUTCFullYear() - 1970);
+      console.log(age);
+      if (userDate > today) {
+        printError("dobError", "Your Date is grater than today");
+        printError("ageError", "Your age is not matched");
       } else {
-        if (userDate > today) {
-          printError("dobError", "Your Date is grater than today");
-        } else {
-          printError("dobError", "");
-        }
+        printError("dobError", "");
+        printError("ageError", "");
+        document.getElementById("age").value = age;
       }
+      // else (!age) {
+      //       printError("dobError", "Please Select Date Of Birth");
+      //     }
+      //       } else {
+      //         printError("dobError", "");
+      //         document.getElementById("age").value = age
+      //       }
+      //     }
+      // let userYear = new Date(nDOB).getFullYear();
+      // let thisYear = new Date().getFullYear();
+      // var userAge = thisYear - userYear;
+      // if (!nDOB) {
+      //   printError("dobError", "Please Select Date Of Birth");
+      // } else {
+      //   if (userDate > today) {
+      //     printError("dobError", "Your Date is grater than today");
+      //   } else {
+      //     printError("dobError", "");
+      //   }
+      // }
     } else if (value.trim().length < 1) {
       printError(`${errorId}`, `Please Enter ${id}`);
     } else {
@@ -170,9 +222,9 @@ const handleInputs = (id, errorId) => {
       } else if (id == "mobileNo") {
         var regName = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
         handleError(value, id, errorId, regName);
-      } else if (id == "age") {
-        var regName = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/;
-        handleError(value, id, errorId, regName);
+        // } else if (id == "age") {
+        //   var regName = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/;
+        //   handleError(value, id, errorId, regName);
       } else if (id == "accountNumber" || id == "c_accountNumber") {
         var regName = /^[0-9]{9,18}$/;
         handleError(value, id, errorId, regName);
@@ -193,6 +245,7 @@ const handleInputs = (id, errorId) => {
   }
 };
 
+// handle error for normal field
 const handelNormalError = (value, id, errorId) => {
   if (!value) {
     printError(`${errorId}`, `Please Enter valid ${id}`);
@@ -202,6 +255,7 @@ const handelNormalError = (value, id, errorId) => {
   }
 };
 
+// handle error for regex field
 const handleError = (val, id, errorId, regex) => {
   if (!regex.test(val)) {
     printError(`${errorId}`, `Please Enter valid ${id}`);
@@ -211,17 +265,27 @@ const handleError = (val, id, errorId, regex) => {
   }
 };
 
+// remove all fields when user submit a form
 const removeFields = () => {
   fields.forEach(function (arr) {
-    arr.value = "";
+    if (arr.value) {
+      console.log(arr);
+      arr.value = "";
+    } else {
+      console.log(arr);
+      arr.checked = false;
+    }
   });
 };
 
+// handle all error's innerHTML and color
 const printError = (err, msg, color = "red") => {
   document.getElementById(err).innerHTML = msg;
   document.getElementById(err).style.color = color;
 };
 
+
+// form validation - when user submit form
 const formValidation = (e) => {
   let fNameError =
     (lNameError =
@@ -494,8 +558,8 @@ const formValidation = (e) => {
     printError("p_countryError", "");
     p_countryError = false;
   }
-  // }
 
+// check all error if at least one true gives errors otherwise stored data in array 
   if (
     (fNameError ||
       lNameError ||
@@ -522,29 +586,6 @@ const formValidation = (e) => {
       p_countryError) == true
   ) {
     console.log("Error");
-    // console.log(fNameError ,
-    //   lNameError ,
-    //   genderError ,
-    //   emailError ,
-    //   educationError ,
-    //   ageError ,
-    //   dobError ,
-    //   hobbiesError ,
-    //   accNoError ,
-    //   conAccNoError ,
-    //   IFSCError ,
-    //   h_noError ,
-    //   socNameError ,
-    //   landmarkError ,
-    //   areaError ,
-    //   pincodeError ,
-    //   countryError ,
-    //   p_h_noError ,
-    //   p_soc_nameError ,
-    //   p_landmarkError ,
-    //   p_areaError ,
-    //   p_pincodeError ,
-    //   p_countryError)
     return false;
   } else {
     console.log("Accept data");
@@ -591,6 +632,9 @@ const formValidation = (e) => {
     removeFields();
   }
 };
+
+
+// accept data and create table and display fields
 const acceptData = (data) => {
   console.log(data);
 
@@ -612,8 +656,8 @@ const acceptData = (data) => {
   <th>Permanent Address</th>
 </tr>`;
 
-for(let d of data) {
-  rows.innerHTML += ` <tr>
+  for (let d of data) {
+    rows.innerHTML += ` <tr>
            <td>${d.id}</td>
            <td>${d.fName}</td>
            <td>${d.lName}</td>
@@ -630,13 +674,17 @@ for(let d of data) {
            <td>${d.address}</td>
            <td>${d.perAddress}</td>
          </tr>`;
-
+  }
 };
-}
 
+
+// handle auto fetch full_name based on first name and last name
 const handelFullName = () => {
   fullName.value = fName.value + " " + lName.value;
 };
+
+
+// handel permanent address when user checked "this is my permanent address" button
 const handelAddress = () => {
   const check_address = pr_address.checked;
 
@@ -656,6 +704,9 @@ const handelAddress = () => {
       p_pincode.value = pincode.value;
       p_country.value = country.value;
       handlePerResetError();
+      perFields.forEach(function (arr) {
+        document.getElementById(arr.id).disabled = true;
+      });
     } else {
       alert("Please enter all fields of address");
       pr_address.checked = false;
@@ -667,17 +718,22 @@ const handelAddress = () => {
     p_area.value = "";
     p_pincode.value = "";
     p_country.value = "";
+    perFields.forEach(function (arr) {
+      document.getElementById(arr.id).disabled = false;
+    });
   }
 };
+
+//  handle permanent address error using reset button (when- user checked a 'this address is my permanent address' button )
 const handlePerResetError = () => {
   perErrorFields.forEach(function (arr) {
     arr.innerHTML = "";
   });
 };
+
+//  handle all fields error using reset button
 const resetError = () => {
   errorFields.forEach(function (arr) {
-    // document.getElementById(arr).innerHTML = " "
     arr.innerHTML = "";
   });
 };
-

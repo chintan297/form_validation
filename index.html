@@ -41,7 +41,7 @@
             </tr>
             <tr>
                 <td>Full Name :</td>
-                <td><input id="fullName" type="text" onclick="handelFullName()" name="fullName" id="fullName" placeholder="Automatically Generated" readonly></td>
+                <td><input id="fullName" type="text" onclick="handelFullName()" name="fullName" id="fullName" placeholder="Click to automatically Fetched" readonly></td>
                 <td><p style="color: black;" id="fullNameError">It is automatically field</p></td>
               </tr>
             <tr>
@@ -55,12 +55,7 @@
               <td><input onkeyup="handleInputs('mobileNo','mobileNoError')" type="text" id="mobileNo" placeholder="Enter Mobile No." /></td>
               <td><p id="mobileNoError"></p></td>
             </tr>
-            <tr>
-                <td>Age :</td>
-                <td><input onkeyup="handleInputs('age','ageError')" type="text" name="age" id="age" placeholder="Enter Age"></td>
-              <td><p id="ageError"></p></td>
-
-            </tr>
+            
             <tr>
                 
               <td>Gender :</td>
@@ -98,7 +93,7 @@
               <td><p id="educationError"></p></td>
 
             </tr>
-            <tr>
+             <tr>
               <td>DOB :</td>
               <td>
                 <input onchange="handleInputs('dob','dobError')" type="date" name="dob" id="dob" />
@@ -106,27 +101,34 @@
               <td><p id="dobError"></p></td>
             </tr>
             <tr>
+              <td>Age :</td>
+              <td><input type="text" readonly name="age" id="age" placeholder="Age is automatically generated"></td>
+            <td><p id="ageError"></p></td>
+
+          </tr>
+           
+            <tr>
               <td>Hobbies :</td>
               <td>
                 <input 
-                  onchange="handleInputs('checkbox','hobbiesError')"
+                  onchange="handleOthers('movie','hobbiesError',this,0)"
                   type="checkbox"
                   name="hobbies"
-                  id="checkbox"
+                  id="movie"
                   value="movie"
                 />Movie
                 <input 
-                onchange="handleInputs('checkbox','hobbiesError')"
+                onchange="handleOthers('sports','hobbiesError',this,1)"
                   type="checkbox"
                   name="hobbies"
-                  id="checkbox"
+                  id="sports"
                   value="sports"
                 />Sports
                 <input 
-                onchange="handleInputs('checkbox','hobbiesError')"
+                onchange="handleOthers('reading','hobbiesError',this,3)"
                   type="checkbox"
                   name="hobbies"
-                  id="checkbox"
+                  id="reading"
                   value="reading"
                 />Reading
               </td>
@@ -420,6 +422,20 @@
                 <td colspan="3">
                     <hr>
                 </td>
+            </tr>
+          </table>
+        </div>
+        <div class="table3">
+          <table>
+            <th>
+              Other Fields
+            </th>
+            <tr>
+              <td>
+                Number1 :
+              </td>
+              <td><input type="text" placeholder="Enter number 1"></td>
+              <td></td>
             </tr>
           </table>
         </div>
